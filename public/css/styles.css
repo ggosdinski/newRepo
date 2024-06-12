@@ -4,3 +4,222 @@
 *:after {
   box-sizing: border-box;
 }
+
+#top-header{
+  width: 480px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.siteName a{
+  font-size: 28px;
+  color: black;
+  text-decoration: none;
+}
+
+#tools a{
+  font-size: 14px;
+  text-decoration: none;
+  color: #616A6B;
+  margin-right: 15px;
+}
+
+nav ul{
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background-color: #34495E;
+  color: white;
+  border-radius: 10px;
+}
+
+nav li{
+  list-style-type: none;
+}
+
+nav a{
+  cursor: pointer;
+}
+
+body{
+  width: 480px;
+  margin: 0 auto;
+  padding: 10px;
+  /* border: 1px solid red; */
+}
+
+h1{
+  font-size: 22px;
+  padding-left: 5px;
+}
+
+
+.main-container{
+  display: flex;
+  width: 80%;
+ /*  position: relative; */
+ margin: 0 auto;
+}
+
+.container1{
+  width: 150px;
+  border: 1px solid white;;
+  padding: 10px;
+  background-color: rgba(52, 73, 94, 0.2);
+  text-align: left;
+}
+
+.container1 p{
+  color:#34495E;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.container1-card{
+  margin-top: 5px;
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+
+.todaybtn{
+  margin-top: 10px;
+  background-color: #34495E;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.todaybtn:hover{
+  cursor: pointer;
+}
+
+.container-delorean-image img {
+  width: 100%;
+  height: auto;
+}
+
+h2{
+  font-size: 22px;
+  padding-left: 5px;
+  margin-top: 25px;
+}
+
+.reviews{
+  width: 80%;
+}
+
+.reviews li{
+  margin-bottom: 15px ;
+}
+
+.images-container{
+  width: 80%;
+  margin: 0 auto; 
+  display: grid;
+  grid-template-columns:1fr 1fr ;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "a b"
+  "c d" ;
+  gap: 20px;
+  text-align: center;
+}
+
+.images-container img{
+  width: 60px;
+  height: 60px;
+  object-fit: fill;
+  vertical-align: middle;
+}
+
+.copyright{
+  font-size: 14px;
+  margin-top: 25px;
+}
+
+@media (min-width: 600px) {
+  html {
+    background-image: url(../images/site/checkerboard.jpg);
+  }
+
+  body {
+    background-color: white;
+    width: 80%;
+    height: 100vh;
+    margin: 0 auto;
+    max-width: 900px;
+   /*  display: flex; */
+    /* justify-content: center;
+    align-items: center; */
+   /*  border: 1px solid red; */
+  }
+
+  #top-header {
+    width: 100%;
+  }
+
+  h1{
+    font-size: 32px;
+  }
+
+  .main-container{
+    max-width: 650px;
+    /* border: 2px solid red; */
+  }  
+  .container1{
+    width: 200px;
+    border: 1px solid white;;
+    padding: 10px;
+    background-color: rgba(52, 73, 94, 0.2);
+    text-align: left;
+  }
+  
+  .container1 p{
+    color:#34495E; 
+  }
+  
+  .container1-card{
+   /*  margin-top: 5px; */
+    font-size: 18px;
+    /* margin-bottom: 0px; */
+  }
+  
+  .todaybtn{
+    margin-top: 10px;
+    background-color: #34495E;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .todaybtn a{
+    font-size: 19px;
+  }
+
+  #delorean-image{
+    content: url(../images/vehicles/delorean.jpg);
+  }
+
+  .content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .delorean-upgrades, .delorean-reviews {
+    width: 45%; 
+  }
+
+  .delorean-upgrades p{
+    font-size: 18px;
+  }
+  .delorean-reviews {
+    margin-left: 20px;
+    font-size: 18px;
+  }
+
+
+}
