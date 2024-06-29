@@ -57,6 +57,9 @@ Util.buildClassificationGrid = async function(data) {
 
 // Function to build vehicle detail HTML
 Util.buildVehicleDetailHTML = function (vehicle) {
+  if (!vehicle) {
+    return '<p class="notice">Vehicle details not found.</p>';
+  }
   let detailHTML = '<div class="vehicle-detail">';
   detailHTML += '<div class="vehicle-header">';
   detailHTML += '<h1>' + vehicle.inv_make + ' ' + vehicle.inv_model + '</h1>';

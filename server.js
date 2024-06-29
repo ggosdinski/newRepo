@@ -20,41 +20,38 @@ const utilities = require('./utilities/');
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
+
 /* ***********************
  * Routes
  *************************/
 app.use(static)
+
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome));
-/* {
-  res.render("index", {title: "Home"})
-}
- */
-
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
 
-// File Not Found Route - must be last route in list
+// Middleware for handling 404 errors (Page Not Found)
 app.use(async (req, res, next) => {
-  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+  next({ status: 404, message: 'Sorry, we appear to have lost that page.' })
 })
 
-
 /* ***********************
-* Express Error Handler
-* Place after all other middleware
-*************************/
+ * Express Error Handler
+ * Place after all other middleware
+ *************************/
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
-  res.render("errors/error", {
+  let nav = await utilities.getNav();
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+  let message = err.status === 404 ? err.message : 'Oh no! There was a crash. Maybe try a different route?';
+  res.status(err.status || 500).render("errors/error", {
     title: err.status || 'Server Error',
     message,
     nav
-  })
-})
+  });
+});
+
 
 /* ***********************
  * Local Server Information
