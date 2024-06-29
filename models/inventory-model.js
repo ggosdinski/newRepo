@@ -14,7 +14,7 @@ async function getInventoryByClassificationId(classification_id) {
   try {
     const data = await pool.query(
       `SELECT * FROM public.inventory AS i 
-      JOIN public.classification AS c 
+      JOIN public.classification AS c
       ON i.classification_id = c.classification_id 
       WHERE i.classification_id = $1`,
       [classification_id]
@@ -26,10 +26,26 @@ async function getInventoryByClassificationId(classification_id) {
 }
 
 
+//Function to get vehicle details by inventory ID
+async function getVehicleById(inv_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.inventory WHERE inv_id = $1`,
+      [inv_id]
+    );
+    return data.rows[0]; // I am not sure about this
+  } catch (error) {
+    console.error("getVehicleById error: " + error);
+  }
+}
 
 
 
 
 
 
-module.exports = {getClassifications, getInventoryByClassificationId};
+module.exports = {
+  getClassifications,
+  getInventoryByClassificationId,
+  getVehicleById,
+};
