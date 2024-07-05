@@ -5,18 +5,48 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "lint": "eslint \"**/*.{js,cjs,ts,mjs,jsx,tsx}\"",
+    "postlint": "template-oss-check",
+    "template-oss-apply": "template-oss-apply --force",
+    "lintfix": "npm run lint -- --fix",
+    "snap": "tap",
+    "test": "tap",
+    "posttest": "npm run lint"
   },
-  "author": "",
+  "author": "GitHub Inc.",
   "license": "ISC",
   "dependencies": {
+    "connect-flash": "^0.1.1",
+    "connect-pg-simple": "^9.0.1",
+    "debug": "^4.3.5",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.10",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.18.0",
     "pg": "^8.8.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
+  },
+  "files": [
+    "bin/",
+    "lib/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ggosdinski/newRepo.git"
+  },
+  "templateOSS": {
+    "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
+    "version": "4.22.0"
+  },
+  "tap": {
+    "nyc-arg": [
+      "--exclude",
+      "tap-snapshots/**"
+    ]
   }
 }

@@ -217,6 +217,80 @@ h2{
   color: #666;
 }
 
+/* Login View */
+.login-container {
+  max-width: 480px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.login-title {
+  font-size: 22px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.flash-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.login-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.login-button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+.login-register {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.login-register-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-register-link:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
 @media (min-width: 600px) {
   html {
     background-image: url(../images/site/checkerboard.jpg);
@@ -336,4 +410,19 @@ h2{
     color: #666;
   }
 
+  .login-container {
+    max-width: 600px;
+  }
+
+  .login-title {
+    font-size: 28px;
+  }
+
+  .login-input {
+    font-size: 16px;
+  }
+
+  .login-button {
+    font-size: 18px;
+  }
 }
