@@ -17,6 +17,7 @@
   "author": "GitHub Inc.",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "connect-flash": "^0.1.1",
     "connect-pg-simple": "^9.0.1",
     "debug": "^4.3.5",
