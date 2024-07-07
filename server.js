@@ -19,8 +19,7 @@ const staticRoutes = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
-/* const flash = require('connect-flash');
-const session = require('express-session'); */
+const Util = require("./utilities/");
 
 const app = express();
 
@@ -61,7 +60,7 @@ app.use(function(req, res, next){
 app.use(staticRoutes);
 
 // Index route
-app.get("/", utilities.handleErrors(baseController.buildHome));
+app.get("/", Util.handleErrors(baseController.buildHome));
 
 // Inventory routes
 app.use("/inv", inventoryRoute);
@@ -79,7 +78,7 @@ app.use(async (req, res, next) => {
  * Place after all other middleware
  *************************/
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav();
+  let nav = await Util.getNav();
   console.error(`Error at: "${req.originalUrl}": ${err.message}`);
   let message = err.status === 404 ? err.message : 'Oh no! There was a crash. Maybe try a different route?';
   res.status(err.status || 500).render("errors/error", {

@@ -1,6 +1,47 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
 
+
+// Función para construir la lista desplegable de clasificaciones
+/* Util.buildClassificationList = async function(classification_id = null) {
+  try {
+    let classifications = await invModel.getClassifications();
+    let classificationList = '<select name="classification_id" id="classificationList" required>';
+    classificationList += '<option value="">Choose a Classification</option>';
+    classifications.rows.forEach((classification) => {
+      classificationList += `<option value="${classification.classification_id}"`;
+      if (classification_id != null && classification.classification_id == classification_id) {
+        classificationList += " selected";
+      }
+      classificationList += `>${classification.classification_name}</option>`;
+    });
+    classificationList += '</select>';
+    return classificationList;
+  } catch (error) {
+    console.error("Error fetching classifications:", error);
+    return '<select name="classification_id" id="classificationList" required><option value="">Error fetching classifications</option></select>';
+  }
+};
+ */
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications()
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>'
+  classificationList += "<option value=''>Choose a Classification</option>"
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"'
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected "
+    }
+    classificationList += ">" + row.classification_name + "</option>"
+  })
+  classificationList += "</select>"
+  return classificationList
+}
+
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -75,7 +116,6 @@ Util.buildVehicleDetailHTML = function (vehicle) {
   detailHTML += '</div>'; // Cierre del contenedor principal vehicle-detail
   return detailHTML;
 };
-
 
 
 /* ****************************************
