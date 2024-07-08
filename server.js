@@ -20,6 +20,7 @@ const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
 const Util = require("./utilities/");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -53,6 +54,14 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+
+/* app.use(utilities.checkJWTToken) */
+
+
+// Uso de cookies
+app.use(cookieParser())
+
 
 /* ***********************
  * Routes

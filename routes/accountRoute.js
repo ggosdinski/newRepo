@@ -24,10 +24,24 @@ router.get("/intentional-error", (req, res, next) => {
 });
 
 // Process the login attempt
-router.post(
+/* router.post(
     "/login",
     (req, res) => {
       res.status(200).send('login process')
     }
   )
+ */
+router.post(
+    "/login",
+    regValidate.loginRules(),
+    regValidate.checkLoginData,
+    utilities.handleErrors(accountController.accountLogin)
+  )
+
+
+// New default route for account management view
+router.get("/", utilities.handleErrors(accountController.buildAccountManagement));
+/* router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement)) */
+// Si uso este codigo, cuando intento loguearme, no me deja, me vuelve a mandar al login. Si uso
+// el de arriba, si puedo loguearme sin problema pero no uso checklogin
 module.exports = router;
