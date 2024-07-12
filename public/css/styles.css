@@ -115,23 +115,23 @@ h2{
   margin-bottom: 15px ;
 }
 
-.images-container{
+.images-container {
   width: 80%;
-  margin: 0 auto; 
+  margin: 0 auto;
   display: grid;
-  grid-template-columns:1fr 1fr ;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-template-areas: "a b"
-  "c d" ;
+  grid-template-areas: "a b" "c d";
   gap: 20px;
   text-align: center;
 }
 
-.images-container img{
-  width: 60px;
-  height: 60px;
-  object-fit: fill;
+.images-container img {
+  width: 100%; /* Asegura que las imágenes ocupen el 100% del espacio disponible */
+  height: auto; /* Mantiene la proporción original de las imágenes */
+  object-fit: cover; /* Ajusta el tamaño de la imagen manteniendo su relación de aspecto */
   vertical-align: middle;
+  border-radius: 5px; /* Opcional: redondea las esquinas de las imágenes */
 }
 
 .copyright{
