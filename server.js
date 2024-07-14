@@ -45,15 +45,24 @@ app.use(session({
   name: 'sessionId',
 }));
 
+
+// Middleware para hacer que la sesión esté disponible en las vistas
+app.use((req, res, next) => {
+  res.locals.user = req.session.user
+  res.locals.loggedin = req.session.loggedin
+  next()
+})
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Express Messages Middleware
-app.use(require('connect-flash')())
+app.use(require('connect-flash')());
 app.use(function(req, res, next){
-  res.locals.messages = require('express-messages')(req, res)
-  next()
-})
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
 
 
 /* app.use(utilities.checkJWTToken) */
@@ -76,6 +85,7 @@ app.use("/inv", inventoryRoute);
 
 // Account routes
 app.use('/account', accountRoute);
+
 
 // Middleware for handling 404 errors (Page Not Found)
 app.use(async (req, res, next) => {

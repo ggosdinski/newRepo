@@ -7,8 +7,26 @@
 </head>
 <body>
   <main>
-    <h1>Account Management</h1>
-    <p>You're logged in</p>
+    <div class="management-container">
+      <h1 class="management-title">Account Management</h1>
+      
+      <!-- Mensaje de bienvenida -->
+      <div class="welcome-section">
+        <% if (user.account_type === 'Client') { %>
+          <h2>Welcome Basic</h2>
+        <% } else { %>
+          <h2>Welcome Happy</h2>
+          <h3>Inventory Management</h3>
+          <p><a href="/inv/management" class="management-link">Manage Inventory</a></p>
+        <% } %>
+      </div>
+      
+      <!-- Acciones de cuenta -->
+      <div class="management-links">
+        <p><a href="/account/update/<%= user._id %>" class="management-link">Update Account Information</a></p>
+        <!-- Agrega más enlaces o acciones según sea necesario -->
+      </div>
+    </div>
   </main>
 </body>
 </html>

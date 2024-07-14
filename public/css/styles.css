@@ -464,13 +464,93 @@ h2{
   text-align: center;
 }
 
+/* Estilos mejorados para la gestión de cuenta */
+.management-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.management-title {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.welcome-section {
+  margin-bottom: 20px;
+}
+
+.welcome-section h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.welcome-section h3 {
+  font-size: 24px;
+  color: #007bff;
+  margin-bottom: 5px;
+}
+
+.management-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.management-link {
+  padding: 12px 24px;
+  background-color:  #34495E;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.management-link:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos adicionales */
+@media (max-width: 600px) {
+  .management-container {
+    padding: 20px;
+  }
+
+  .management-title {
+    font-size: 28px;
+  }
+
+  .welcome-section h2 {
+    font-size: 24px;
+  }
+
+  .welcome-section h3 {
+    font-size: 20px;
+  }
+
+  .management-link {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+
+
 @media (min-width: 600px) {
   html {
-    background-image: url(../images/site/checkerboard.jpg);
+    background-image: url(../images/site/happy-couple-car-showroom-dealership.jpg);
   }
 
   body {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
     width: 80%;
     height: 100vh;
     margin: 0 auto;
@@ -518,7 +598,8 @@ h2{
   }
 
   #delorean-image{
-    content: url(../images/vehicles/delorean.jpg);
+    content: url(../images/vehicles/delorean-fotor-bg-remover-20240713225635.png);
+   
   }
 
   .content-container {

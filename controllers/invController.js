@@ -6,18 +6,18 @@ const invCont = {};
 
 // Función para construir la vista de gestión
 invCont.buildManagementView = async (req, res, next) => {
-    let nav = await Util.getNav();
-    
-    // Espacio para llamar a la función que crea la lista desplegable de clasificaciones
-    let classificationList = await Util.buildClassificationList();
-    
-    res.render("inventory/management", {
-      title: "Inventory Management",
-      nav,
-      errors: null,
-      classificationList,  // Pasando la lista de selección a la vista
-    })
-  };
+  let nav = await Util.getNav();
+  
+  // Espacio para llamar a la función que crea la lista desplegable de clasificaciones
+  let classificationList = await Util.buildClassificationList();
+  
+  res.render("inventory/management", {
+    title: "Inventory Management",
+    nav,
+    errors: null,
+    classificationList,  // Pasando la lista de selección a la vista
+  });
+};
 
 // Función para mostrar el formulario de agregar clasificación
 invCont.showAddClassification = async (req, res, next) => {
@@ -193,6 +193,53 @@ invCont.buildVehicleDetail = async function (req, res, next) {
   }
 };
 
+// Función para construir la vista de confirmación de eliminación de inventario
+invCont.buildDeleteConfirmView = async function (req, res, next) {
+  try {
+    const inv_id = req.params.invId;
+    let nav = await Util.getNav();
+    
+    const itemData = await invModel.getInventoryById(inv_id);
+
+    if (!itemData) {
+      req.flash('error', 'Inventory item not found');
+      return res.redirect('/inv/management');
+    }
+
+    const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+
+    res.render("./inventory/delete-confirm", {
+      title: "Delete " + itemName,
+      nav,
+      messages: req.flash('error'), 
+      ...itemData // Spread operator for cleaner code
+    });
+  } catch (error) {
+    console.error("Error rendering delete confirmation view:", error);
+    next(error);
+  }
+};
+
+// Función para eliminar el inventario
+invCont.deleteInventory = async function (req, res, next) {
+  try {
+    const inv_id = req.params.invId;
+    const deleteResult = await invModel.deleteInventory(inv_id);
+
+    if (!deleteResult) {
+      req.flash('error', 'Failed to delete inventory item');
+    } else {
+      req.flash('notice', 'Inventory item deleted successfully');
+    }
+
+    res.redirect("/inv/management");
+  } catch (error) {
+    console.error("Error deleting inventory item:", error);
+    req.flash('error', 'Failed to delete inventory item. Please try again.');
+    res.redirect("/inv/management");
+  }
+};
+
 // Controlador para ruta de error intencional
 exports.generateIntentionalError = Util.handleErrors(async (req, res, next) => {
   throw new Error("This is an intentional 500 error.");
@@ -209,7 +256,7 @@ invCont.getInventoryJSON = async (req, res, next) => {
   } else {
     next(new Error("No data returned"))
   }
-}
+};
 
 /* ***************************
  *  Build edit inventory view
@@ -302,7 +349,37 @@ invCont.updateInventory = async function (req, res, next) {
       itemData,
     })
   }
-}
+};
+
+
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.params.invId, 10);
+
+  if (isNaN(inv_id)) {
+    req.flash('error', 'Invalid inventory ID');
+    return res.redirect('/inv/management');
+  }
+
+  try {
+    const deleteResult = await invModel.deleteInventoryItem(inv_id);
+
+    if (deleteResult === 0) {
+      req.flash('error', 'Failed to delete inventory item');
+      return res.redirect(`/inv/delete-confirm/${inv_id}`);
+    } else {
+      req.flash('notice', 'Inventory item deleted successfully');
+      return res.redirect("/inv/management");
+    }
+  } catch (error) {
+    console.error("Error deleting inventory item:", error);
+    req.flash('error', 'Failed to delete inventory item. Please try again.');
+    return res.redirect(`/inv/delete-confirm/${inv_id}`);
+  }
+};
+
 
 
 module.exports = invCont;
