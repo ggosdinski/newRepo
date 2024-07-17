@@ -473,16 +473,19 @@ h2{
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  /* border: 2px solid black; */
 }
 
 .management-title {
   font-size: 32px;
   color: #333;
   margin-bottom: 20px;
+  
 }
 
 .welcome-section {
   margin-bottom: 20px;
+  
 }
 
 .welcome-section h2 {
@@ -520,7 +523,7 @@ h2{
 }
 
 /* Estilos adicionales */
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .management-container {
     padding: 20px;
   }
@@ -541,8 +544,9 @@ h2{
     font-size: 16px;
     padding: 10px 20px;
   }
-}
+} */
 
+/* Update Account Information Page */
 
 @media (min-width: 600px) {
   html {

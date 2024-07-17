@@ -4,55 +4,56 @@
     <meta charset="UTF-8">
     <title>Update Account Information</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/account-update.css">
 </head>
 
 <body>
-    <main>
-        <h1>Update Account Information</h1>
+    <main class="container">
+        <h1 class="page-title">Update Account Information</h1>
 
         <!-- Account Update Form -->
-        <form action="/account/update" method="POST">
-            <h2>Account Update</h2>
+        <form action="/account/update" method="POST" class="form">
+            <h2 class="form-title">Account Update</h2>
 
             <!-- Display client's first name, last name, and email -->
-            <div>
-                <label for="account_firstname">First Name:</label>
-                <input type="text" id="account_firstname" name="account_firstname" value="<%= account_firstname %>" required>
+            <div class="form-group">
+                <label for="account_firstname" class="form-label">First Name:</label>
+                <input type="text" id="account_firstname" name="account_firstname" value="<%= account_firstname %>" class="form-input" required>
             </div>
-            <div>
-                <label for="account_lastname">Last Name:</label>
-                <input type="text" id="account_lastname" name="account_lastname" value="<%= account_lastname %>" required>
+            <div class="form-group">
+                <label for="account_lastname" class="form-label">Last Name:</label>
+                <input type="text" id="account_lastname" name="account_lastname" value="<%= account_lastname %>" class="form-input" required>
             </div>
-            <div>
-                <label for="account_email">Email Address:</label>
-                <input type="email" id="account_email" name="account_email" value="<%= account_email %>" required>
+            <div class="form-group">
+                <label for="account_email" class="form-label">Email Address:</label>
+                <input type="email" id="account_email" name="account_email" value="<%= account_email %>" class="form-input" required>
             </div>
             
             <!-- Hidden field for account_id -->
-            <input type="hidden" name="account_id" value="<%= account_id %>">            
+            <input type="hidden" name="account_id" value="<%= account_id %>" class="form-input">            
 
             <!-- Submit button -->
-            <button type="submit">Update Account</button>
+            <button type="submit" class="form-button">Update Account</button>
         </form>
 
         <!-- Change Password Form -->
-        <form action="/account/change-password" method="POST">
-            <h2>Change Password</h2>
+        <form action="/account/change-password" method="POST" class="form">
+            <h2 class="form-title">Change Password</h2>
             
             <!-- Password change instructions -->
-            <p>Enter a new password to change your current password.</p>
+            <p class="form-instructions">Enter a new password to change your current password.</p>
 
             <!-- Password input field -->
-            <div>
-                <label for="account_password">New Password:</label>
-                <input type="password" id="account_password" name="account_password" required>
+            <div class="form-group">
+                <label for="account_password" class="form-label">New Password:</label>
+                <input type="password" id="account_password" name="account_password" class="form-input" required>
             </div>
             
             <!-- Hidden field for account_id -->
-            <input type="hidden" name="account_id" value="<%= account_id %>">
+            <input type="hidden" name="account_id" value="<%= account_id %>" class="form-input">
 
             <!-- Submit button -->
-            <button type="submit">Change Password</button>
+            <button type="submit" class="form-button">Change Password</button>
         </form>
 
     </main>

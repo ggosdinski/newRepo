@@ -160,6 +160,7 @@ async function buildAccountManagement(req, res, next) {
  * *************************************** */
 const showUpdateAccountForm = async (req, res) => {
   try {
+    let nav = await utilities.getNav();
     const userId = req.session.user.account_id;
     const user = await accountModel.getAccountById(userId);
 
@@ -169,6 +170,7 @@ const showUpdateAccountForm = async (req, res) => {
 
     res.render('account/update', {
       title: 'Update Account Information',
+      nav,
       account_firstname: user.account_firstname,
       account_lastname: user.account_lastname,
       account_email: user.account_email,
@@ -192,7 +194,7 @@ const updateAccount = async (req, res) => {
     await accountModel.updateAccount(userId, account_firstname, account_lastname, account_email);
 
     req.flash('notice', 'Account information updated successfully.');
-    res.redirect('/account/');
+    res.redirect('/account/update');
   } catch (err) {
     console.error('Error updating account:', err);
     res.status(500).send('Server error');
