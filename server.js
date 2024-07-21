@@ -21,6 +21,7 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
 const Util = require("./utilities/");
 const cookieParser = require("cookie-parser");
+const path = require('path');
 
 const app = express();
 
@@ -91,6 +92,9 @@ app.use('/account', accountRoute);
 app.use(async (req, res, next) => {
   next({ status: 404, message: 'Sorry, we appear to have lost that page.' });
 });
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 /* ***********************
  * Express Error Handler

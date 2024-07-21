@@ -3,6 +3,8 @@ const accountModel = require("../models/account-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
+const path = require('path');
+const fs = require('fs');
 require("dotenv").config();
 
 /* ****************************************
@@ -175,7 +177,8 @@ const showUpdateAccountForm = async (req, res) => {
       account_lastname: user.account_lastname,
       account_email: user.account_email,
       account_id: user.account_id,
-      errors: []  // Ensure errors array is defined, even if empty
+      profile_image: user.profile_image,  
+      errors: [] 
     });
   } catch (err) {
     console.error('Error fetching user:', err);
@@ -220,6 +223,31 @@ const changePassword = async (req, res) => {
   }
 };
 
+/* ****************************************
+ *  Handle Profile Picture Upload
+ * *************************************** */
+async function uploadProfilePicture(req, res, next) {
+  try {
+    if (!req.file) {
+      req.flash("notice", "No file uploaded. Please try again.");
+      return res.redirect("/account/update");
+    }
+
+    // La ruta del archivo cargado
+    const filePath = `/images/users/${req.file.filename}`;
+    const userId = req.session.user.account_id;
+
+    await accountModel.updateProfilePicture(userId, filePath);
+
+    req.flash("notice", "Profile picture updated successfully.");
+    res.redirect("/account/update");
+  } catch (error) {
+    console.error("Error uploading profile picture:", error.message);
+    req.flash("error", "Error uploading profile picture. Please try again later.");
+    res.redirect("/account/update");
+  }
+}
+
 
 // Logout function
 const logout = async (req, res) => {
@@ -233,7 +261,7 @@ const logout = async (req, res) => {
         // Clear the JWT cookie if present
         res.clearCookie("jwt");
         // Redirect to the home view or login view
-        res.redirect("/"); // Puedes cambiar esto a la ruta que desees después del logout
+        res.redirect("/"); 
       }
     });
   } catch (error) {
@@ -241,7 +269,6 @@ const logout = async (req, res) => {
     res.status(500).send("Logout failed. Please try again.");
   }
 };
-
 
 module.exports = {
   buildLogin,
@@ -252,5 +279,6 @@ module.exports = {
   showUpdateAccountForm,
   updateAccount,
   changePassword,
+  uploadProfilePicture,
   logout
 };

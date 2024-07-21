@@ -522,31 +522,24 @@ h2{
   background-color: #0056b3;
 }
 
-/* Estilos adicionales */
-/* @media (max-width: 600px) {
-  .management-container {
-    padding: 20px;
-  }
+/* Estilos para el contenedor de la imagen de perfil */
+.profile-image-container {
+  text-align: center; /* Centra horizontalmente el contenido dentro del contenedor */
+  margin-bottom: 20px; /* Espacio debajo del contenedor */
+}
 
-  .management-title {
-    font-size: 28px;
-  }
+.profile-image-container .form-title {
+  margin-bottom: 10px; /* Espacio entre el título y la imagen */
+}
 
-  .welcome-section h2 {
-    font-size: 24px;
-  }
+.profile-image-container .profile-image {
+  width: 120px; /* Ajusta el tamaño según sea necesario */
+  height: 120px; /* Ajusta el tamaño según sea necesario */
+  border-radius: 50%; /* Hace que la imagen sea circular */
+  object-fit: cover; /* Asegura que la imagen cubra el contenedor sin deformarse */
+  border: 3px solid #ddd; /* Añade un borde opcional */
+}
 
-  .welcome-section h3 {
-    font-size: 20px;
-  }
-
-  .management-link {
-    font-size: 16px;
-    padding: 10px 20px;
-  }
-} */
-
-/* Update Account Information Page */
 
 @media (min-width: 600px) {
   html {

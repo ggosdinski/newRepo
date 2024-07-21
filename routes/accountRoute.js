@@ -1,8 +1,23 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+const path = require("path");
 const utilities = require("../utilities/");
 const accountController = require("../controllers/accountController");
 const regValidate = require("../utilities/account-validation");
+
+// Multer configuration for image upload
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, '../public/images/users')); 
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)); 
+  }
+});
+
+const upload = multer({ storage: storage });
+
 
 // Route to display login view
 router.get("/login", accountController.buildLogin);
@@ -65,9 +80,14 @@ router.post(
   utilities.handleErrors(accountController.changePassword)
 );
 
+// Route for uploading profile picture
+router.post(
+  "/upload-profile-picture",
+  upload.single('profile_picture'),
+  utilities.handleErrors(accountController.uploadProfilePicture)
+);
 
 // Route for logout
 router.get("/logout", accountController.logout);
-
 
 module.exports = router;

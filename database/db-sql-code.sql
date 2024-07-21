@@ -47,6 +47,9 @@ CREATE TABLE IF NOT EXISTS public.account
     CONSTRAINT account_pkey PRIMARY KEY (account_id)
 );
 
+--Adding profile image column for account table
+ALTER TABLE public.account ADD COLUMN profile_image VARCHAR(255);
+
 -- Data for table classification
 INSERT INTO public.classification (classification_name)
 VALUES('Custom'),

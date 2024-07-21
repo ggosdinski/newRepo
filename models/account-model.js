@@ -12,35 +12,32 @@ async function registerAccount(account_firstname, account_lastname, account_emai
   }
 }
 
-
 /* **********************
  *   Check for existing email
  * ********************* */
 async function checkExistingEmail(account_email){
   try {
-    const sql = "SELECT * FROM account WHERE account_email = $1"
-    const email = await pool.query(sql, [account_email])
-    return email.rowCount
+    const sql = "SELECT * FROM account WHERE account_email = $1";
+    const email = await pool.query(sql, [account_email]);
+    return email.rowCount;
   } catch (error) {
-    return error.message
+    return error.message;
   }
 }
-
 
 /* *****************************
 * Return account data using email address
 * ***************************** */
-async function getAccountByEmail (account_email) {
+async function getAccountByEmail(account_email) {
   try {
     const result = await pool.query(
       'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_email = $1',
-      [account_email])
-    return result.rows[0]
+      [account_email]);
+    return result.rows[0];
   } catch (error) {
-    return new Error("No matching email found")
+    return new Error("No matching email found");
   }
 }
-
 
 /* *****************************
  * Return account data using account_id
@@ -48,7 +45,7 @@ async function getAccountByEmail (account_email) {
 async function getAccountById(account_id) {
   try {
     const result = await pool.query(
-      'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_id = $1',
+      'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password, profile_image FROM account WHERE account_id = $1',
       [account_id]
     );
     return result.rows[0];
@@ -56,7 +53,6 @@ async function getAccountById(account_id) {
     throw new Error("Error fetching account by ID");
   }
 }
-
 
 /* *****************************
  *  Update account information
@@ -92,11 +88,28 @@ async function updatePassword(account_id, hashedPassword) {
   }
 }
 
+/* *****************************
+ *  Update profile picture
+ * *************************** */
+async function updateProfilePicture(account_id, filePath) {
+  try {
+    const sql = `
+      UPDATE account
+      SET profile_image = $1
+      WHERE account_id = $2
+    `;
+    await pool.query(sql, [filePath, account_id]);
+  } catch (error) {
+    throw new Error('Error updating profile picture');
+  }
+}
+
 module.exports = {
   registerAccount,
   checkExistingEmail,
   getAccountByEmail,
   getAccountById,
   updateAccount,
-  updatePassword
+  updatePassword,
+  updateProfilePicture
 };

@@ -55,6 +55,24 @@
             <!-- Submit button -->
             <button type="submit" class="form-button">Change Password</button>
         </form>
+        <!-- Upload Profile Picture Form -->
+        <form action="/account/upload-profile-picture" method="POST" enctype="multipart/form-data" class="form">
+            <h2 class="form-title">Upload Profile Picture</h2>
+            <div class="form-group">
+            <label for="profile_picture" class="form-label">Profile Picture:</label>
+            <input type="file" id="profile_picture" name="profile_picture" class="form-input" required>
+            </div>
+            <button type="submit" class="form-button">Upload Image</button>
+        </form>
+
+        <!-- Display current profile image if available -->
+        <% if (profile_image) { %>
+            <div class="profile-image-container">
+                <h2 class="form-title">Current Profile Image</h2>
+                <img src="<%- profile_image %>" alt="Profile Image" class="profile-image">
+            </div>
+        <% } %>
+
 
     </main>
 </body>
